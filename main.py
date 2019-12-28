@@ -1,11 +1,11 @@
-from random import sample
+import random
 
 
 def throw(dice_count):
     if not 1 <= dice_count <= 6:
         raise Exception(f'the number of dice thrown is not between 1 and 6: {dice_count}')
 
-    return sorted(sample(range(1, 7), dice_count))
+    return sorted(random.choices(range(1, 7), k=dice_count))
 
 
 def score(dice_values):
