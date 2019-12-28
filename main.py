@@ -1,6 +1,16 @@
+from random import sample
+
+
+def throw(dice_count):
+    if not 1 <= dice_count <= 6:
+        raise Exception(f'the number of dice thrown is not between 1 and 6: {dice_count}')
+
+    return sorted(sample(range(1, 7), dice_count))
+
+
 def score(dice_values):
     if not 1 <= len(dice_values) <= 6:
-        raise Exception(f'the number dice kept is not between 1 and 6: {len(dice_values)}')
+        raise Exception(f'the number of dice kept is not between 1 and 6: {len(dice_values)}')
 
     frequencies_table = dict()
     for die in dice_values:

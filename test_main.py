@@ -1,8 +1,26 @@
-from main import *
-import unittest
+from main import throw, score
+from unittest import main, TestCase
+from unittest.mock import patch
 
 
-class Test(unittest.TestCase):
+class TestThrow(TestCase):
+
+    def test_invalid_number_of_dice(self):
+        for dice in [0, 7]:
+            with self.assertRaises(Exception) as cm:
+                throw(dice)
+
+            self.assertEqual((f'the number of dice thrown is not between 1 and 6: {dice}',), cm.exception.args)
+
+    @patch('main.sample')
+    def test_sample_returned(self, mock_sample):
+        for dice in [1, 5]:
+            mock_sample.return_value = [6, 1, 1, 1, 1, 1]
+            self.assertEqual(sorted(mock_sample.return_value), throw(dice))
+            mock_sample.assert_called_with(range(1, 7), dice)
+
+
+class TestScore(TestCase):
 
     def test_invalid_number_of_dice(self):
         for dice in [
@@ -12,7 +30,7 @@ class Test(unittest.TestCase):
             with self.assertRaises(Exception) as cm:
                 score(dice)
 
-            self.assertEqual((f'the number dice kept is not between 1 and 6: {len(dice)}',), cm.exception.args)
+            self.assertEqual((f'the number of dice kept is not between 1 and 6: {len(dice)}',), cm.exception.args)
 
     def test_invalid_die_values(self):
         for die in [0, 7, 1.5, 'not a number']:
@@ -66,4 +84,4 @@ class Test(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main()
+    main()
