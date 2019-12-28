@@ -7,18 +7,4 @@ AlphaFarkle is designed to learn to effectively play the game of Farkle by exclu
 ## Design 
 
 Because Farkle is a folk game, the rules are not well standardized.  AlphaFarkle is trained using the
-[rules defined by Elverson Puzzle](https://www.elversonpuzzle.com/Farkle-instructions11.pdf). 
-
-## Development
-
-Restore packages:
-
-```shell script
-pip install -r requirements.txt
-```
-
-Run unit tests:
-
-```shell script
-python -m unittest
-```
+[rules defined by Elverson Puzzle](https://www.elversonpuzzle.com/Farkle-instructions11.pdf).
