@@ -9,26 +9,27 @@ def score(dice_values):
         frequencies_table[die] = frequencies_table.get(die, 0) + 1
 
     frequencies = list(frequencies_table.values())
+    if frequencies == [6]:
+        return 3000
+    if frequencies == [3, 3]:
+        return 2500
+    if frequencies == [2, 2, 2]:
+        return 1500
+    if frequencies == [1, 1, 1, 1, 1, 1]:
+        return 1500
+
     total = 0
-    for die_value, frequency in sorted(frequencies_table.items(), key=lambda x: x[1], reverse=True):
+    for die_value, frequency in sorted(frequencies_table.items(), key=lambda x: x[1]):
         if frequency <= 2:
-            if frequencies == [2, 2, 2]:
-                return 1500
-            if frequencies == [1, 1, 1, 1, 1, 1]:
-                return 1500
             if die_value == 1:
                 total += 100 * frequency
             elif die_value == 5:
                 total += 50 * frequency
         elif frequency == 3:
-            if frequencies == [3, 3]:
-                return 2500
             total += 1000 if die_value == 1 else die_value * 100
         elif frequency == 4:
             total += 1100 if die_value == 1 else 1000
         elif frequency == 5:
             total += 2000
-        else:
-            return 3000
 
     return total
