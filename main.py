@@ -8,14 +8,16 @@ def throw(dice_count):
     return sorted(random.choices(range(1, 7), k=dice_count))
 
 
-def score(dice_values):
+def score(dice_values, farkle_count):
     if not 1 <= len(dice_values) <= 6:
         raise Exception(f'the number of dice kept is not between 1 and 6: {len(dice_values)}')
+    if not 0 <= farkle_count <= 2:
+        raise Exception(f'the number of farkles is not an integer in range [0, 2]: {farkle_count}')
 
     frequencies_table = dict()
     for die in dice_values:
         if die not in range(1, 7):
-            raise Exception(f'die value is not in integer between range [1, 6]: {die}')
+            raise Exception(f'die value is not an integer in range [1, 6]: {die}')
         frequencies_table[die] = frequencies_table.get(die, 0) + 1
 
     frequencies = list(frequencies_table.values())
@@ -42,4 +44,4 @@ def score(dice_values):
         elif frequency == 5:
             total += 2000
 
-    return total
+    return -1000 if total == 0 and farkle_count == 2 else total
